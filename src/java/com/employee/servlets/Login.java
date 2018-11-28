@@ -5,6 +5,7 @@
  */
 package com.employee.servlets;
 
+import com.employee.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,32 +21,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+    
+    private final String loginPage = "/WEB-INF/login.jsp";
+    private final String employeeList = "/WEB-INF/employeeList.jsp";
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -58,7 +37,8 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        this.getServletContext().getRequestDispatcher( this.loginPage ).forward( request, response );
     }
 
     /**
@@ -72,7 +52,25 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        HttpSession session = request.getSession();
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        String message = "";
+        String page = this.loginPage;
+        
+        request.setAttribute("message", "Yes tu as cliqué yes");
+        
+        if(login.equals("login") && password.equals("pass")) {
+            message = "Wilkomen mein freund ! ";
+            session.setAttribute("message", "Bravo you got into the site bro");
+            response.sendRedirect("Employees");
+        }
+        else {
+            message = "Wrong credentials";
+            request.setAttribute("message", message);
+            this.getServletContext().getRequestDispatcher( page ).forward( request, response );
+        } 
     }
 
     /**

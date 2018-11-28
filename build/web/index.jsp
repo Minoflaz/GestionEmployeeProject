@@ -29,5 +29,6 @@
                 <p><input class="btn btn-primary" type="submit" value="Login"></p>
             </div>
         </form>
+        <p>${ lol } </p>
     </body>
 </html>
