@@ -5,9 +5,13 @@
  */
 package com.employee.servlets;
 
+import com.employee.model.Employee;
 import com.employee.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author alexis
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
+@WebServlet(name = "Login", urlPatterns = {"/"})
 public class Login extends HttpServlet {
     
     private final String loginPage = "/WEB-INF/login.jsp";
@@ -38,7 +42,31 @@ public class Login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        this.getServletContext().getRequestDispatcher( this.loginPage ).forward( request, response );
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        
+        String page = this.loginPage;
+        
+        ArrayList<Employee> employees =  new ArrayList<>();
+        
+        employees.add(new Employee("Nouvellon","Thomas","090393039","0330303039","0393339","3 rue de la boustipaille","Paris","75012","nouvellon@lol.fr"));
+        employees.add(new Employee("Saidani","Alexis","09393389","09333999","039339309","3 rue de la bertide","Paris","75013","saidani@lol.fr"));
+        employees.add(new Employee("Chapelle","Pierrick","09393389","09333999","039339309","3 rue de la vaillot","Paris","75020","chapelle@lol.fr"));
+
+        request.setAttribute("employees", employees);
+        
+        if(request.getParameterMap().containsKey("action") && request.getParameter("action").equals("disconnect")) {
+            session.invalidate();
+            //response.sendRedirect("/");
+            this.getServletContext().getRequestDispatcher( page ).forward( request, response );
+        }
+        
+        //If user is connected
+        if(user != null) {
+            page = this.employeeList;
+        }
+        
+        this.getServletContext().getRequestDispatcher( page ).forward( request, response );
     }
 
     /**
@@ -54,23 +82,39 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        String message = "";
+        User user = (User)session.getAttribute("user");
+        
         String page = this.loginPage;
         
-        request.setAttribute("message", "Yes tu as cliqué yes");
+        ArrayList<Employee> employees =  new ArrayList<>();
+
+        employees.add(new Employee("Nouvellon","Thomas","090393039","0330303039","0393339","3 rue de la boustipaille","Paris","75012","nouvellon@lol.fr"));
+        employees.add(new Employee("Saidani","Alexis","09393389","09333999","039339309","3 rue de la bertide","Paris","75013","saidani@lol.fr"));
+        employees.add(new Employee("Chapelle","Pierrick","09393389","09333999","039339309","3 rue de la vaillot","Paris","75020","chapelle@lol.fr"));
+
+        request.setAttribute("employees", employees);
         
-        if(login.equals("login") && password.equals("pass")) {
-            message = "Wilkomen mein freund ! ";
-            session.setAttribute("message", "Bravo you got into the site bro");
-            response.sendRedirect("Employees");
+        //If user is connected
+        if(user != null) {
+            page = this.employeeList;
         }
-        else {
-            message = "Wrong credentials";
-            request.setAttribute("message", message);
-            this.getServletContext().getRequestDispatcher( page ).forward( request, response );
-        } 
+        else {            
+            String login = request.getParameter("login");
+            String password = request.getParameter("password");
+            
+            if(login.equals("login") && password.equals("pass")) {
+                session.setAttribute("message", "Bravo you got into the site bro");
+                user = new User(login,password);
+                session.setAttribute("user",user);
+                
+                page = this.employeeList;
+            }
+            else {
+                request.setAttribute("message", "Wrong credentials");
+            } 
+        }
+        
+        this.getServletContext().getRequestDispatcher( page ).forward( request, response );
     }
 
     /**

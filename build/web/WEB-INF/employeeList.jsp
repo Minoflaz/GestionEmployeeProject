@@ -4,6 +4,7 @@
     Author     : alexis
 --%>
 
+<%@page import="com.employee.model.Employee"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.employee.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,7 +25,7 @@
     </head>
     <body>  
         <%
-            ArrayList<User> users = (ArrayList<User>) request.getAttribute("users");
+            ArrayList<Employee> employees = (ArrayList<Employee>) request.getAttribute("employees");
         %>
         <h2>Employees</h2>
         <table class="table table-striped">
@@ -42,18 +43,20 @@
             <tbody>
                 <%
                 int i;
-                for(i=0;i<users.size();i++) {%>
+                for(i=0;i<employees.size();i++) {%>
                     <tr> 
-                        <td><% out.print(users.get(i).getName()); %></td>
-                        <td><% out.print(users.get(i).getFirstname()); %></td>
-                        <td><% out.print(users.get(i).getHouseNum()); %></td>
-                        <td><% out.print(users.get(i).getMobileNum()); %></td>
-                        <td><% out.print(users.get(i).getProNum()); %></td>
-                        <td><% out.print(users.get(i).getAdress() + ", " + users.get(i).getCity() + " " + users.get(i).getPostalCode());%></td>
-                        <td><% out.print(users.get(i).getEmail()); %></td>
+                        <td><% out.print(employees.get(i).getName()); %></td>
+                        <td><% out.print(employees.get(i).getFirstname()); %></td>
+                        <td><% out.print(employees.get(i).getHouseNum()); %></td>
+                        <td><% out.print(employees.get(i).getMobileNum()); %></td>
+                        <td><% out.print(employees.get(i).getProNum()); %></td>
+                        <td><% out.print(employees.get(i).getAdress() + ", " + employees.get(i).getCity() + " " + employees.get(i).getPostalCode());%></td>
+                        <td><% out.print(employees.get(i).getEmail()); %></td>
                     </tr>
                 <%}%>   
             </tbody>
         </table>
+            
+        <a href="/GestionEmployeeProject/?action=disconnect">Disconnect</a>
     </body>
 </html>

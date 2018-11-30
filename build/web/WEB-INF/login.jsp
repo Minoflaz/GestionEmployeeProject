@@ -30,6 +30,5 @@
                 <p>${ message }</p>
             </div>
         </form>
-        <p>${ lol } </p>
     </body>
 </html>

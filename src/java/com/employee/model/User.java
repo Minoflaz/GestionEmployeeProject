@@ -7,104 +7,30 @@ package com.employee.model;
 
 /**
  *
- * @author alexis
+ * @author minoflaz
  */
 public class User {
-    
-    private String name;
-    private String firstname;
-    private String houseNum;
-    private String mobileNum;
-    private String proNum;
-    private String adress;
-    private String city;
-    private String postalCode;
-    private String email;
+    private String login;
+    private String password;
 
-    public User(String name, String firstname, String houseNum, String mobileNum, String proNum, String adress, String city, String postalCode, String email) {
-        this.name = name;
-        this.firstname = firstname;
-        this.houseNum = houseNum;
-        this.mobileNum = mobileNum;
-        this.proNum = proNum;
-        this.adress = adress;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.email = email;
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public void setHouseNum(String houseNum) {
-        this.houseNum = houseNum;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMobileNum(String mobileNum) {
-        this.mobileNum = mobileNum;
-    }
-
-    public void setProNum(String proNum) {
-        this.proNum = proNum;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public String getHouseNum() {
-        return houseNum;
-    }
-
-    public String getMobileNum() {
-        return mobileNum;
-    }
-
-    public String getProNum() {
-        return proNum;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-    
-    
-    
+    public void setPassword(String password) {
+        this.password = password;
+    }            
 }
