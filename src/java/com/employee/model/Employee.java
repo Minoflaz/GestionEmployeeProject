@@ -11,6 +11,7 @@ package com.employee.model;
  */
 public class Employee {
     
+    private int id;
     private String name;
     private String firstname;
     private String houseNum;
@@ -20,6 +21,10 @@ public class Employee {
     private String city;
     private String postalCode;
     private String email;
+    
+    public Employee() {
+        
+    }
 
     public Employee(String name, String firstname, String houseNum, String mobileNum, String proNum, String adress, String city, String postalCode, String email) {
         this.name = name;
@@ -103,6 +108,42 @@ public class Employee {
 
     public String getEmail() {
         return email;
+    }
+        
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public String getInsertQuery() {
+        return "INSERT INTO EMPlOYEE(NOM,PRENOM,TELDOM,TELPORT,TELPRO,ADRESSE,CODEPOSTAL,VILLE,EMAIL) "
+                + "VALUES("
+                + "'" + this.name + "',"
+                + "'" + this.firstname + "',"
+                + "'" + this.houseNum + "',"
+                + "'" + this.mobileNum + "',"
+                + "'" + this.proNum + "',"
+                + "'" + this.adress + "',"
+                + "'" + this.postalCode + "',"
+                + "'" + this.city + "',"
+                + "'" + this.email + "'"
+                + ")";
+    }
+    
+    public String getUpdateQuery() {
+        return "UPDATE EMPLOYEE SET " 
+                    + "NOM = "     + "'" + this.name + "'," 
+                    + "PRENOM = "  + "'" + this.firstname + "',"
+                    + "TELDOM = "  + "'" + this.houseNum + "',"
+                    + "TELPORT = " + "'" + this.mobileNum + "',"
+                    + "TELPRO = "  + "'" + this.proNum + "',"
+                    + "ADRESSE = "    + "'" + this.adress + "',"
+                    + "CODEPOSTAL = " + "'" + this.postalCode + "',"
+                    + "VILLE = "      + "'" + this.city + "',"
+                    + "EMAIL = "    + "'" + this.email + "'";
     }
     
     

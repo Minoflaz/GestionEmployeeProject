@@ -28,6 +28,7 @@ public class Login extends HttpServlet {
     
     private final String loginPage = "/WEB-INF/login.jsp";
     private final String employeeList = "/WEB-INF/employeeList.jsp";
+    private final String employeeDetail = "/WEB-INF/employeeDetail.jsp";
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -63,7 +64,12 @@ public class Login extends HttpServlet {
         
         //If user is connected
         if(user != null) {
-            page = this.employeeList;
+            if( request.getParameterMap().containsKey("employeeId")) {
+                page = this.employeeDetail;
+            }
+            else {
+                page = this.employeeList;
+            }
         }
         
         this.getServletContext().getRequestDispatcher( page ).forward( request, response );

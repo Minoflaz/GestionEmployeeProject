@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/minoflaz/GestionEmployeeProject/src/java/com/employee/model/Userrr.java</file>
+            <file>file:/home/minoflaz/GestionEmployeeProject/src/java/com/employee/servlets/Login.java</file>
+            <file>file:/home/minoflaz/GestionEmployeeProject/web/WEB-INF/employeeList.jsp</file>
             <file>file:/home/minoflaz/GestionEmployeeProject/src/java/com/employee/model/User.java</file>
+            <file>file:/home/minoflaz/GestionEmployeeProject/web/WEB-INF/login.jsp</file>
         </group>
     </open-files>
 </project-private>
