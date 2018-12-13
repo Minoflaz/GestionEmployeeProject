@@ -74,7 +74,14 @@ public class Login extends HttpServlet {
         
         //If user is connected
         if(user != null) {
-            if( request.getParameterMap().containsKey("employeeId")) {
+            if( request.getAttribute("employeeId") != null) {
+                Employee employee = new Employee();
+                try {
+                    employee = employeeRepo.getEmployee(Integer.parseInt(request.getParameter("employeeId")));
+                } catch (SQLException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                request.setAttribute("employee", employee);
                 page = this.employeeDetail;
             }
             else {
@@ -118,7 +125,19 @@ public class Login extends HttpServlet {
         
         //If user is connected
         if(user != null) {
-            page = this.employeeList;
+            if( request.getAttribute("employeeId") != null) {
+                Employee employee = new Employee();
+                try {
+                    employee = employeeRepo.getEmployee(Integer.parseInt(request.getParameter("employeeId")));
+                } catch (SQLException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                request.setAttribute("employee", employee);
+                page = this.employeeDetail;
+            }
+            else {
+                page = this.employeeList;
+            }
         }
         else {            
             String login = request.getParameter("login");

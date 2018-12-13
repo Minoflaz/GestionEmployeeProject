@@ -28,34 +28,45 @@
             ArrayList<Employee> employees = (ArrayList<Employee>) request.getAttribute("employees");
         %>
         <h2>Employees</h2>
-        <table class="table table-striped">
-            <thead>
-              <tr> 
-                <th scope="col">Name</th>
-                <th scope="col">FirstName</th>
-                <th scope="col">HouseNum</th>
-                <th scope="col">MobileNum</th>
-                <th scope="col">ProNum</th>
-                <th scope="col">Adress</th>
-                <th scope="col">Email</th>
-              </tr>
-            </thead>
-            <tbody>
-                <%
-                int i;
-                for(i=0;i<employees.size();i++) {%>
-                    <tr> 
-                        <td><% out.print(employees.get(i).getName()); %></td>
-                        <td><% out.print(employees.get(i).getFirstname()); %></td>
-                        <td><% out.print(employees.get(i).getHouseNum()); %></td>
-                        <td><% out.print(employees.get(i).getMobileNum()); %></td>
-                        <td><% out.print(employees.get(i).getProNum()); %></td>
-                        <td><% out.print(employees.get(i).getAdress() + ", " + employees.get(i).getCity() + " " + employees.get(i).getPostalCode());%></td>
-                        <td><% out.print(employees.get(i).getEmail()); %></td>
+        <form action="" method="post" class="form-horizontal" role="form">
+            <table class="table table-striped">
+                <thead>
+                  <tr> 
+                      <th scope="col">Sel</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">HouseNum</th>
+                    <th scope="col">MobileNum</th>
+                    <th scope="col">ProNum</th>
+                    <th scope="col">Adress</th>
+                    <th scope="col">Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <%
+                    int i;
+                    for(i=0;i<employees.size();i++) {%>
+                        <tr>   
+                            <td><input type="radio" id="employeeId" name="employeeId" value="<% out.print(employees.get(i).getId()); %>"></td>
+                            <td><% out.print(employees.get(i).getName()); %></td>
+                            <td><% out.print(employees.get(i).getFirstname()); %></td>
+                            <td><% out.print(employees.get(i).getHouseNum()); %></td>
+                            <td><% out.print(employees.get(i).getMobileNum()); %></td>
+                            <td><% out.print(employees.get(i).getProNum()); %></td>
+                            <td><% out.print(employees.get(i).getAdress() + ", " + employees.get(i).getCity() + " " + employees.get(i).getPostalCode());%></td>
+                            <td><% out.print(employees.get(i).getEmail()); %></td>
+                        </tr>
+                    <%}%>   
+                </tbody>
+            </table>
+                <table>
+                    <tr>
+                        <td><p><input class="btn btn-primary" type="submit" name="action" value="Supprimer"></p></td>
+                        <td><p><input class="btn btn-primary" type="submit" name="action"value="Details"></p></td>
+                        <td><p><input class="btn btn-default" type="submit" name="action" value="Ajouter"></p></td>
                     </tr>
-                <%}%>   
-            </tbody>
-        </table>
+                </table>
+        </form>
             
         <a href="/GestionEmployeeProject/?action=disconnect">Disconnect</a>
     </body>

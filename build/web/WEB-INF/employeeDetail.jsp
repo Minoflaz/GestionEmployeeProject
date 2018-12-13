@@ -22,20 +22,22 @@
         <title>Login</title>
     </head>
     <body>
-        
+        <%
+            Employee employee = (Employee) request.getAttribute("employee");
+        %>
         <form action="" method="post" class="form-horizontal" role="form">
             <h2 class="form-signin-heading col-lg-offset-5">Employee</h2>
             <div class="col-lg-4 col-lg-offset-4">
-                <p><input class="form-control" type="text" name="name" id="name"></p>
-                <p><input class="form-control" type="text" name="firstname" id="firstname"></p>
-                <p><input class="form-control" type="text" name="houseNum" id="houseNum"></p>
-                <p><input class="form-control" type="text" name="mobileNum" id="mobileNum"></p>
-                <p><input class="form-control" type="text" name="proNum" id="proNum"></p>
-                <p><input class="form-control" type="text" name="adress" id="adress"></p>
-                <p><input class="form-control" type="text" name="postalCode" id="postalCode"></p>
-                <p><input class="form-control" type="text" name="city" id="city"></p>
-                <p><input class="form-control" type="text" name="email" id="email"></p>
-                <p><input class="btn btn-primary" type="submit" value="Login"></p>
+                <p><input class="form-control" type="text" name="name" id="name" value="<% out.print(employee.getName()); %>"></p>
+                <p><input class="form-control" type="text" name="firstname" id="firstname" value="<% out.print(employee.getFirstname()); %>"></p>
+                <p><input class="form-control" type="text" name="houseNum" id="houseNum" value="<% out.print(employee.getHouseNum()); %><"></p>
+                <p><input class="form-control" type="text" name="mobileNum" id="mobileNum" value="<% out.print(employee.getMobileNum()); %>"></p>
+                <p><input class="form-control" type="text" name="proNum" id="proNum" value="<% out.print(employee.getProNum()); %>"></p>
+                <p><input class="form-control" type="text" name="adress" id="adress" value="<% out.print(employee.getAdress()); %>"></p>
+                <p><input class="form-control" type="text" name="postalCode" id="postalCode" value="<% out.print(employee.getPostalCode()); %>"></p>
+                <p><input class="form-control" type="text" name="city" id="city" value="<% out.print(employee.getCity()); %>"></p>
+                <p><input class="form-control" type="text" name="email" id="email" value="<% out.print(employee.getEmail()); %>"></p>
+                <p><input class="btn btn-primary" type="submit" value="Login" ></p>
                 <p>${ message }</p>
             </div>
         </form>

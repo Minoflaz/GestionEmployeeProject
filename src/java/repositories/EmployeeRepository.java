@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import utilities.DatabaseConnexion;
 
 
 /**
@@ -19,9 +20,9 @@ import java.util.ArrayList;
  * @author minoflaz
  */
 public class EmployeeRepository {
-    String url = "jdbc:derby://localhost:1527/PROJET";
-    String utilisateur = "adm";
-    String motDePasse = "adm";
+    String url = "gestionemployee.cfcrtek2s05x.eu-west-3.rds.amazonaws.com/gestionemployee";
+    String utilisateur = "minoflaz";
+    String motDePasse = DatabaseConnexion.pass;
     Connection connexion = null;
     Statement statement = null;
     ResultSet result = null;
