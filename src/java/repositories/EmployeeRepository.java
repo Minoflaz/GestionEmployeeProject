@@ -48,19 +48,21 @@ public class EmployeeRepository {
     public Employee getEmployee(int id) throws SQLException {
         statement = connexion.createStatement();
         
-        ResultSet result = statement.executeQuery("SELECT * FROM EPLOYEE WHERE ID = " + id);
+        ResultSet result = statement.executeQuery("SELECT * FROM EMPLOYES WHERE ID = " + id);
         Employee employee = new Employee();
         
-        employee.setId(result.getInt(1));
-        employee.setName(result.getString(2));
-        employee.setFirstname(result.getString(3));
-        employee.setHouseNum(result.getString(4));
-        employee.setMobileNum(result.getString(5));
-        employee.setProNum(result.getString(6));
-        employee.setAdress(result.getString(7));
-        employee.setCity(result.getString(8));
-        employee.setPostalCode(result.getString(9));
-        employee.setEmail(result.getString(10));
+        if (result.next()) {
+            employee.setId(result.getInt(1));
+            employee.setName(result.getString(2));
+            employee.setFirstname(result.getString(3));
+            employee.setHouseNum(result.getString(4));
+            employee.setMobileNum(result.getString(5));
+            employee.setProNum(result.getString(6));
+            employee.setAdress(result.getString(7));
+            employee.setCity(result.getString(8));
+            employee.setPostalCode(result.getString(9));
+            employee.setEmail(result.getString(10));
+        }
         
         this.endResult();
         
@@ -70,7 +72,7 @@ public class EmployeeRepository {
     public ArrayList<Employee> getAllEmployees() throws SQLException {
         statement = connexion.createStatement();
         
-        ResultSet result = statement.executeQuery("SELECT * FROM EMPLOYEE");
+        ResultSet result = statement.executeQuery("SELECT * FROM EMPLOYES");
         ArrayList<Employee> allEmployees = new ArrayList<>();
         
         while(result.next()) {

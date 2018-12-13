@@ -9,7 +9,10 @@ import com.employee.model.Employee;
 import com.employee.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import repositories.EmployeeRepository;
 
 /**
  *
@@ -48,11 +52,17 @@ public class Login extends HttpServlet {
         
         String page = this.loginPage;
         
-        ArrayList<Employee> employees =  new ArrayList<>();
+        EmployeeRepository employeeRepo = new EmployeeRepository();
+        ArrayList<Employee> employees = new ArrayList<>();
+        try {
+            employees = employeeRepo.getAllEmployees();
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        employees.add(new Employee("Nouvellon","Thomas","090393039","0330303039","0393339","3 rue de la boustipaille","Paris","75012","nouvellon@lol.fr"));
-        employees.add(new Employee("Saidani","Alexis","09393389","09333999","039339309","3 rue de la bertide","Paris","75013","saidani@lol.fr"));
-        employees.add(new Employee("Chapelle","Pierrick","09393389","09333999","039339309","3 rue de la vaillot","Paris","75020","chapelle@lol.fr"));
+        //employees.add(new Employee("Nouvellon","Thomas","090393039","0330303039","0393339","3 rue de la boustipaille","Paris","75012","nouvellon@lol.fr"));
+        //employees.add(new Employee("Saidani","Alexis","œ09393389","09333999","039339309","3 rue de la bertide","Paris","75013","saidani@lol.fr"));
+        //employees.add(new Employee("Chapelle","Pierrick","09393389","09333999","039339309","3 rue de la vaillot","Paris","75020","chapelle@lol.fr"));
 
         request.setAttribute("employees", employees);
         
@@ -92,12 +102,18 @@ public class Login extends HttpServlet {
         
         String page = this.loginPage;
         
-        ArrayList<Employee> employees =  new ArrayList<>();
-
-        employees.add(new Employee("Nouvellon","Thomas","090393039","0330303039","0393339","3 rue de la boustipaille","Paris","75012","nouvellon@lol.fr"));
-        employees.add(new Employee("Saidani","Alexis","09393389","09333999","039339309","3 rue de la bertide","Paris","75013","saidani@lol.fr"));
-        employees.add(new Employee("Chapelle","Pierrick","09393389","09333999","039339309","3 rue de la vaillot","Paris","75020","chapelle@lol.fr"));
-
+        EmployeeRepository employeeRepo = new EmployeeRepository();
+        ArrayList<Employee> employees = new ArrayList<>();
+        try {
+            employees = employeeRepo.getAllEmployees();
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //employees.add(new Employee("Nouvellon","Thomas","090393039","0330303039","0393339","3 rue de la boustipaille","Paris","75012","nouvellon@lol.fr"));
+        //employees.add(new Employee("Saidani","Alexis","œ09393389","09333999","039339309","3 rue de la bertide","Paris","75013","saidani@lol.fr"));
+        //employees.add(new Employee("Chapelle","Pierrick","09393389","09333999","039339309","3 rue de la vaillot","Paris","75020","chapelle@lol.fr"));
+        
         request.setAttribute("employees", employees);
         
         //If user is connected
