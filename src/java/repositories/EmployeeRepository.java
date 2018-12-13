@@ -20,7 +20,7 @@ import utilities.DatabaseConnexion;
  * @author minoflaz
  */
 public class EmployeeRepository {
-    String url = "gestionemployee.cfcrtek2s05x.eu-west-3.rds.amazonaws.com/gestionemployee";
+    String url = "jdbc:mysql://gestionemployee.cfcrtek2s05x.eu-west-3.rds.amazonaws.com:3306/gestionemployee";
     String utilisateur = "minoflaz";
     String motDePasse = DatabaseConnexion.pass;
     Connection connexion = null;
